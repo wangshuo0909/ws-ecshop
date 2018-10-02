@@ -1,18 +1,19 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	"fmt"
 	"github.com/wangshuo0909/ws-ecshop/handle"
+	"github.com/gin-gonic/gin"
 )
 
+
 func main()  {
-	http.Handle("/goods/", &handle.Goods{})
-	http.Handle("/orders", &handle.Order{})
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatalf("server start failed %v", err)
-	} else {
-		fmt.Println("server started...")
-	}
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context){
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	r.GET("/goods", handle.GoodsList)
+	r.GET("/goods/:id", handle.Goods)
+	r.Run()
 }
