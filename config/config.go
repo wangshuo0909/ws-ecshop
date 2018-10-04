@@ -1,16 +1,29 @@
-
 package config
 
-var config *Config
+import (
+	"log"
+	"github.com/spf13/viper"
+)
+
+var DefaultConfig *Config
 
 type Config struct {
-    Secret string
-}
-func LoadConfig() *Config{
-	//
-	return &Config{}
+	JWTSecret string
 }
 
-func init(){
-	config = LoadConfig()
+func LoadConfig() *Config {
+	config := viper.New()
+	config.SetConfigName("Config")
+	config.AddConfigPath(".")
+	err := config.ReadInConfig()
+	if err != nil {
+		log.Fatalf("Fatal error context file: %s \n", err)
+	}
+	return &Config{
+		JWTSecret: config.Get("JWT.secret").(string),
+	}
+}
+
+func init() {
+	DefaultConfig = LoadConfig()
 }

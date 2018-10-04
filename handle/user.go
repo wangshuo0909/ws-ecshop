@@ -53,7 +53,7 @@ func generateToken(user *model.User) (token string) {
 	pre := append(append(base64UrlEncode(hs), '.'), base64UrlEncode(payLoadByte)...)
 	sign := hmacsha256(
 		pre,
-		[]byte("24124dwqdqfqwdsasdasdw"))
+		[]byte(config.DefaultConfig.JWTSecret))
 	token = string(append(append(pre, '.'), base64UrlEncode(sign)...))
 	return
 }

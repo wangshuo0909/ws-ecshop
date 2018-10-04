@@ -7,7 +7,7 @@ import (
 
 
 func main()  {
-	r := gin.Default()
+	r := gin.New()
 	r.GET("/ping", func(c *gin.Context){
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -16,5 +16,10 @@ func main()  {
 	r.GET("/goods", handle.GoodsList)
 	r.GET("/goods/:id", handle.Goods)
 	r.POST("/login",handle.Login)
+	authorized := r.Group("/")
+	authorized.Use(handle.AuthRequired())
+	{
+		authorized.GET("/addresses", handle.AddressList)
+	}
 	r.Run()
 }
