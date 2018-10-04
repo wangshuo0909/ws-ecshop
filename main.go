@@ -15,5 +15,6 @@ func main()  {
 	})
 	r.GET("/goods", handle.GoodsList)
 	r.GET("/goods/:id", handle.Goods)
+	r.POST("/login",handle.Login)
 	r.Run()
 }
