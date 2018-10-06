@@ -26,8 +26,8 @@
 
 
 [[constraint]]
-  name = "github.com/gin-gonic/gin"
   branch = "master"
+  name = "github.com/gin-gonic/gin"
 
 [[constraint]]
   name = "github.com/go-sql-driver/mysql"
