@@ -1,3 +1,5 @@
 .vscode/
 gin-bin
 gin-bin.exe
+vendor/
+Gopkg.lock

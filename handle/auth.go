@@ -28,9 +28,12 @@ func AuthRequired() gin.HandlerFunc {
 		}
 		//写入user信息入gin.Context
 		user, _ := base64.StdEncoding.DecodeString(tokenArr[1])
-		log.Printf("%s\n", user)
-		// json.Unmarshal(user)
-		// c.Keys["user"] = 
+		userMap := make(map[string]interface{})
+		json.Unmarshal(user, &userMap)
+		if c.Keys == nil {
+			c.Keys = make(map[string]interface{})
+		}
+		c.Keys["user"] = userMap
 		c.Next()
 	}
 }
