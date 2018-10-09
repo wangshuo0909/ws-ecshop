@@ -16,6 +16,7 @@ func main()  {
 	r.GET("/goods", handle.GoodsList)
 	r.GET("/goods/:id", handle.Goods)
 	r.POST("/login",handle.Login)
+	r.GET("/hotgoods", handle.Hotgoods)
 	authorized := r.Group("/")
 	authorized.Use(handle.AuthRequired())
 	{
